@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opções de Pagamento |</title>
+    <title>Opções de Pagamento </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -23,6 +23,7 @@
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --pix-color: #32bcad;
         }
 
         * {
@@ -88,11 +89,6 @@
             transition: all 0.2s ease;
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-2px);
-        }
-
         .brand-section {
             display: flex;
             flex-direction: column;
@@ -131,14 +127,8 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
             font-size: 1rem;
             position: relative;
-        }
-
-        .search-btn:hover, .cart-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
         }
 
         .cart-badge {
@@ -213,12 +203,6 @@
             justify-content: center;
             cursor: pointer;
             color: var(--text-dark);
-            transition: all 0.2s ease;
-        }
-
-        .review-back-btn:hover {
-            background: var(--primary-light);
-            color: var(--primary);
         }
 
         .review-header-title {
@@ -256,16 +240,10 @@
             gap: 12px;
         }
 
-        .payment-option-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 85, 255, 0.12);
-        }
-
         .payment-option-card.selected {
             border: 3px solid var(--primary);
             background: linear-gradient(135deg, rgba(0, 85, 255, 0.05) 0%, rgba(0, 85, 255, 0.02) 100%);
-            box-shadow: 0 12px 32px rgba(0, 85, 255, 0.18), inset 0 1px 0 rgba(0, 85, 255, 0.1);
+            box-shadow: 0 12px 32px rgba(0, 85, 255, 0.18);
         }
 
         .payment-option-card.selected::after {
@@ -283,12 +261,11 @@
             justify-content: center;
             font-weight: 900;
             font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3);
         }
 
         .payment-option-card.pix-card {
             background: linear-gradient(145deg, #f0fffe 0%, #e8fbf8 100%);
-            border: 2px solid #32bcad;
+            border: 2px solid var(--pix-color);
             box-shadow: 0 8px 24px rgba(50, 188, 173, 0.15);
         }
 
@@ -302,12 +279,11 @@
             font-size: 0.7rem;
             font-weight: 800;
             transform: rotate(45deg);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .payment-option-icon {
             font-size: 1.8rem;
-            color: #32bcad;
+            color: var(--pix-color);
             margin-bottom: 4px;
         }
 
@@ -320,7 +296,7 @@
         .payment-option-price {
             font-size: 1.5rem;
             font-weight: 900;
-            color: #32bcad;
+            color: var(--pix-color);
         }
 
         .payment-option-desc {
@@ -353,7 +329,7 @@
         .pix-input-group label {
             font-size: 0.75rem;
             font-weight: 700;
-            color: #32bcad;
+            color: var(--pix-color);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -364,14 +340,7 @@
             border-radius: 10px;
             font-size: 0.95rem;
             background: white;
-            transition: all 0.2s ease;
             color: var(--text-dark);
-        }
-
-        .pix-input-group input:focus {
-            border-color: #32bcad;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(50, 188, 173, 0.1);
         }
 
         .payment-action-btn {
@@ -382,7 +351,6 @@
             font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -390,7 +358,7 @@
         }
 
         .btn-pay-now {
-            background: #32bcad;
+            background: var(--pix-color);
             color: white;
         }
 
@@ -453,14 +421,13 @@
             justify-content: center;
             cursor: pointer;
             color: var(--text-gray);
-            transition: all 0.2s ease;
         }
 
         .modal-icon {
             width: 64px;
             height: 64px;
             background: rgba(50, 188, 173, 0.1);
-            color: #32bcad;
+            color: var(--pix-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -494,31 +461,36 @@
             line-height: 1.5;
         }
 
-        .qr-container {
-            background: #f8f9fa;
+        /* ==================== OPTIMIZED PIX COPY BOX ==================== */
+        .pix-copy-container {
+            background: #f0fffe;
+            border: 2px solid var(--pix-color);
             padding: 20px;
             border-radius: 16px;
             text-align: center;
             margin-bottom: 20px;
+            animation: pulse 2s infinite;
         }
 
-        #pix-qr-img {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 15px;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(50, 188, 173, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(50, 188, 173, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(50, 188, 173, 0); }
         }
 
         .pix-code-box {
             background: white;
-            border: 1px dashed #32bcad;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.75rem;
+            border: 1px dashed var(--pix-color);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
             word-break: break-all;
-            color: var(--text-gray);
+            color: var(--text-dark);
             margin-bottom: 15px;
-            max-height: 60px;
+            font-family: monospace;
+            max-height: 100px;
             overflow-y: auto;
+            text-align: left;
         }
 
         .btn-modal {
@@ -528,14 +500,19 @@
             font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
             border: none;
             margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-modal:active {
+            transform: scale(0.98);
         }
 
         .btn-modal-pix {
-            background: #32bcad;
+            background: var(--pix-color);
             color: white;
+            box-shadow: 0 4px 12px rgba(50, 188, 173, 0.3);
         }
 
         .btn-modal-continue {
@@ -567,13 +544,6 @@
             border: 2px solid var(--border-color);
             border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary);
-            outline: none;
-            background: var(--primary-light);
         }
 
         .btn-send-form {
@@ -611,7 +581,7 @@
                     <i class="fas fa-arrow-left"></i>
                 </button>
                 <div class="brand-section">
-                    <div class="brand-logo">PagOnline</div>
+                    <div class="brand-logo">PAG-ONLINE</div>
                     <div class="brand-tagline">Pagamento Seguro</div>
                 </div>
             </div>
@@ -644,42 +614,40 @@
         </div>
     </div>
 
-    <!-- PIX MODAL (from HTML 1) -->
+    <!-- PIX MODAL (OPTIMIZED) -->
     <div class="modal-overlay" id="pix-modal">
         <div class="modal-content">
             <button class="modal-close-btn" onclick="closePixModal()">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="modal-icon"><i class="fas fa-qrcode"></i></div>
-            <h3 class="modal-title">Pagamento Pix</h3>
-            <p class="modal-text">Escaneie o QR Code ou copie o código abaixo para pagar.</p>
+            <div class="modal-icon"><i class="fas fa-bolt"></i></div>
+            <h3 class="modal-title">Pagamento Rápido</h3>
+            <p class="modal-text">Copie o código abaixo e cole no aplicativo do seu banco para finalizar.</p>
             
-            <div class="qr-container">
-                <img id="pix-qr-img" src="" alt="QR Code Pix">
-                <div class="pix-code-box" id="pix-code-text"></div>
+            <div class="pix-copy-container">
+                <div class="pix-code-box" id="pix-code-text">Aguardando código...</div>
                 <button class="btn-modal btn-modal-pix" id="btn-copy-pix">
-                    <i class="fas fa-copy"></i> Copiar Código Pix
+                    <i class="fas fa-copy"></i> COPIAR CÓDIGO PIX
                 </button>
             </div>
             
-            <button class="btn-modal btn-modal-continue" onclick="closePixModal()">
+            <button class="btn-modal btn-modal-continue" id="btn-already-paid">
                 Já realizei o pagamento
             </button>
         </div>
     </div>
 
-    <!-- DELIVERY MODAL (from HTML 2) -->
+    <!-- DELIVERY MODAL -->
     <div class="modal-overlay" id="delivery-modal">
         <div class="modal-content" id="delivery-modal-content">
             <button class="modal-close-btn" id="modal-close-btn-delivery">
                 <i class="fas fa-times"></i>
             </button>
             
-            <!-- Step 1: Warning -->
             <div id="modal-step-1">
                 <div class="modal-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
                 <h3 class="modal-title">Você tem certeza?</h3>
-                <p class="modal-text" id="delivery-warning-text">Ao escolher o pagamento na entrega, você <b>perde a promoção exclusiva do Pix</b> e pagará o valor integral sem descontos.</p>
+                <p class="modal-text" id="delivery-warning-text">Ao escolher o pagamento na entrega, você perde a promoção exclusiva do Pix e pagará o valor integral sem descontos.</p>
                 <div class="modal-buttons">
                     <button class="btn-modal btn-modal-pix" id="modal-back-to-pix">
                         <i class="fas fa-qrcode"></i> Quero o desconto do Pix
@@ -690,7 +658,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Form -->
             <div id="modal-step-2" style="display:none;">
                 <h3 class="modal-title">Dados para Entrega</h3>
                 <p class="modal-text">Preencha seus dados para finalizarmos seu pedido na entrega.</p>
@@ -711,7 +678,6 @@
                 </form>
             </div>
 
-            <!-- Step 3: Success -->
             <div id="modal-step-3" style="display:none;">
                 <div class="modal-icon success"><i class="fas fa-check-circle"></i></div>
                 <h3 class="modal-title">Pedido Recebido!</h3>
@@ -722,17 +688,14 @@
     </div>
 
     <script>
-        // Function to get URL parameters
         function getUrlParameter(name) {
             const params = new URLSearchParams(window.location.search);
             return params.get(name);
         }
 
-        // Get subtotal from URL, default to 89.47 if not provided
         const subtotalFromUrl = getUrlParameter('subtotal');
         const subtotalValue = subtotalFromUrl ? parseFloat(subtotalFromUrl) : 89.47;
 
-        // CPF Mask Function
         function maskCPF(value) {
             return value
                 .replace(/\D/g, '')
@@ -768,7 +731,7 @@
                     <div class="payment-options-container">
                         <div class="payment-option-card pix-card selected" id="pay-now-pix">
                             <div class="payment-badge-promo">Desconto Ativo</div>
-                            <div class="payment-option-icon"><i class="fas fa-qrcode"></i></div>
+                            <div class="payment-option-icon"><i class="fas fa-bolt"></i></div>
                             <div class="payment-option-title">Pagar Agora - Pix</div>
                             <div class="payment-option-price">R$ ${baseTotal.toFixed(2).replace('.', ',')}</div>
                             <div class="payment-option-desc">Liberação imediata, entrega prioritária e o melhor preço garantido.</div>
@@ -785,7 +748,7 @@
                             </div>
 
                             <button class="payment-action-btn btn-pay-now" id="btn-generate-pix" style="margin-top:10px;">
-                                <span class="btn-text">Gerar QR Code Pix <i class="fas fa-check"></i></span>
+                                <span class="btn-text">Gerar Código Pix <i class="fas fa-check"></i></span>
                             </button>
                         </div>
 
@@ -813,12 +776,11 @@
             
             pixCard.addEventListener('click', (e) => {
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') return;
-
                 if (selectedPaymentType !== 'pix') {
                     selectedPaymentType = 'pix';
                     pixCard.classList.add('selected');
                     deliveryCard.classList.remove('selected');
-                    pixCard.querySelector('.btn-text').innerHTML = 'Gerar QR Code Pix <i class="fas fa-check"></i>';
+                    pixCard.querySelector('.btn-text').innerHTML = 'Gerar Código Pix <i class="fas fa-check"></i>';
                     deliveryCard.querySelector('.btn-text').innerHTML = 'Selecionar <i class="fas fa-chevron-right"></i>';
                 } else if (e.target.closest('.payment-action-btn')) {
                     generatePix();
@@ -838,7 +800,6 @@
             });
         }
 
-        // Pix Functions
         async function generatePix() {
             const name = document.getElementById('pix-name').value;
             const cpf = document.getElementById('pix-cpf').value.replace(/\D/g, '');
@@ -860,26 +821,14 @@
                     body: JSON.stringify({
                         paymentMethod: 'PIX',
                         amount: Math.round(subtotalValue * 100),
-                        customer: {
-                            name: name,
-                            document: {
-                                number: cpf,
-                                type: 'CPF'
-                            }
-                        },
-                        items: [{
-                            title: 'Pagamento Seguro',
-                            unitPrice: Math.round(subtotalValue * 100),
-                            quantity: 1
-                        }]
+                        customer: { name: name, document: { number: cpf, type: 'CPF' } },
+                        items: [{ title: 'Pagamento Seguro', unitPrice: Math.round(subtotalValue * 100), quantity: 1 }]
                     })
                 });
 
                 const data = await response.json();
-                
                 if (data.pix && (data.pix.qrcode || data.pix.qrCode)) {
                     const qrCode = data.pix.qrcode || data.pix.qrCode;
-                    document.getElementById('pix-qr-img').src = qrCode;
                     document.getElementById('pix-code-text').innerText = qrCode;
                     document.getElementById('pix-modal').classList.add('active');
                 } else {
@@ -900,10 +849,23 @@
 
         document.getElementById('btn-copy-pix').addEventListener('click', () => {
             const code = document.getElementById('pix-code-text').innerText;
-            navigator.clipboard.writeText(code).then(() => alert('Código copiado!'));
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.getElementById('btn-copy-pix');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> CÓDIGO COPIADO!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
         });
 
-        // Delivery Modal Functions
+        document.getElementById('btn-already-paid').addEventListener('click', () => {
+            // REDIRECIONAMENTO APÓS PAGAMENTO
+            window.location.href = 'https://www.exemplo.com'; 
+        });
+
         function showDeliveryModal() {
             const baseTotal = subtotalValue;
             const deliveryTotal = baseTotal * 1.44;
