@@ -75,10 +75,14 @@ app.post('/api/payments/:method', async (req, res) => {
     }
 });
 
-// CORREÇÃO PARA EXPRESS 5.x:
-// O caractere '*' sozinho não é mais permitido. 
-// A sintaxe correta para capturar todas as rotas é '/:path(.*)'
-app.get('/:path(.*)', (req, res) => {
+// SOLUÇÃO UNIVERSAL PARA QUALQUER VERSÃO DO EXPRESS:
+// Usar uma expressão regular direta para capturar todas as rotas e servir o index.html
+app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Fallback final caso a regex acima não capture (como a raiz '/')
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
