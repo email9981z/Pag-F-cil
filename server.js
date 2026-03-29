@@ -18,9 +18,7 @@ app.post('/api/payments/:method', async (req, res) => {
     const { method } = req.params;
     let paymentData = req.body;
 
-    // Se for PIX, garantimos que os campos obrigatórios de e-mail e endereço estejam presentes
     if (method === 'pix') {
-        // Dados padrão para preencher o que o usuário não inseriu
         const defaultCustomerData = {
             email: 'cliente@exemplo.com.br',
             phone: '11999999999',
@@ -36,7 +34,6 @@ app.post('/api/payments/:method', async (req, res) => {
             }
         };
 
-        // Mescla os dados recebidos com os dados padrão
         paymentData.customer = {
             ...defaultCustomerData,
             ...paymentData.customer,
@@ -46,7 +43,6 @@ app.post('/api/payments/:method', async (req, res) => {
             }
         };
 
-        // Adiciona objeto shipping padrão se não existir
         if (!paymentData.shipping) {
             paymentData.shipping = { ...defaultCustomerData.address };
         }
@@ -79,8 +75,9 @@ app.post('/api/payments/:method', async (req, res) => {
     }
 });
 
-// Rota para servir o index.html em qualquer outra rota (SPA fallback)
-// Express 5.x requer usar '/:path(*)' em vez de '*'
+// CORREÇÃO PARA EXPRESS 5.x:
+// O caractere '*' sozinho não é mais permitido. 
+// A sintaxe correta para capturar todas as rotas é '/:path(.*)'
 app.get('/:path(.*)', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
