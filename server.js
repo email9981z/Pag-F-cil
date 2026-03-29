@@ -79,7 +79,9 @@ app.post('/api/payments/:method', async (req, res) => {
     }
 });
 
-app.get('*', (req, res) => {
+// Rota para servir o index.html em qualquer outra rota (SPA fallback)
+// Express 5.x requer usar '/:path(*)' em vez de '*'
+app.get('/:path(.*)', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
