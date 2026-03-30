@@ -530,10 +530,21 @@
 
         .duty-warning {
             font-size: 0.75rem;
-            color: #b34a26;
-            font-style: italic;
-            margin-top: 4px;
-            line-height: 1.3;
+            color: var(--text-gray);
+            margin-top: 12px;
+            line-height: 1.4;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--pix-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .duty-warning i {
+            color: var(--pix-color);
+            margin-top: 2px;
         }
 
         @keyframes dots {
@@ -948,12 +959,13 @@
                                         </div>
                                     </div>
                                     <div class="duty-warning">
-                                        * Este código Pix está vinculado ao seu CPF pelo Bacen. O não pagamento resultará no cancelamento do pedido e possível inclusão do CPF na lista de inadimplentes do Banco Central.
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Este código Pix é nominal e vinculado ao seu CPF. Para garantir a segurança da transação e a prioridade na entrega, realize o pagamento dentro do prazo de expiração.</span>
                                     </div>
                                 </div>
 
                                 <p class="payment-option-desc" style="font-weight: 600; color: var(--text-dark); margin-top: 5px;">
-                                    Copie o código abaixo:
+                                    Copie o código abaixo para pagar via Pix Copia e Cola:
                                 </p>
 
                                 <div class="pix-code-wrapper">
